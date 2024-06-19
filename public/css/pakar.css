@@ -1,0 +1,41 @@
+.box-icon-1 {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DCFAF8;
+    color: #16DBCC;
+}
+
+.box-icon-2 {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFE0EB;
+    color: #FF82AC;
+}
+
+.box-icon-3 {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFF5D9;
+    color: #FFBB38;
+}
+
+.btn-sumbit {
+    background-color: #2D60FF !important;
+    color: white !important;
+    height: 50px;
+}
