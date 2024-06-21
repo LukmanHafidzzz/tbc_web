@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Indication;
 use App\Models\IndicationList;
 use App\Models\KnowledgeData;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -42,9 +44,17 @@ class UserController extends Controller
             'address' => 'required|string|max:255',
             'indication_code' => 'required|array',
         ]);
-
-        $solution = $validatedData['age'] < 15 ? 'Kategori anak' : 'Kategori 1';
-
+    
+        $client = new Client();
+        $response = $client->post('http://localhost:90/predict', [
+            'json' => [
+                'indications' => $validatedData['indication_code']
+            ]
+        ]);
+    
+        $prediction = json_decode($response->getBody()->getContents(), true);
+        Log::info('Prediction Data: ', $prediction);
+    
         $knowledgeData = KnowledgeData::create([
             'user_id' => auth()->id(),
             'name' => $validatedData['name'],
@@ -52,25 +62,18 @@ class UserController extends Controller
             'gender' => $validatedData['gender'],
             'weight' => $validatedData['weight'],
             'address' => $validatedData['address'],
-            'solution' => $solution,
-            'md' => 0,  
+            'solution' => $prediction['solution'],
+            'md' => $prediction['md_score'],
+            'disease' => $prediction['disease'],
         ]);
-
-        $mdTotal = 0;
-
+    
         foreach ($validatedData['indication_code'] as $indicationCode) {
-            $indication = IndicationList::create([
+            IndicationList::create([
                 'knowledge_id' => $knowledgeData->id,
                 'indication_code' => $indicationCode,
             ]);
-    
-            $mdScore = Indication::where('indication_code', $indicationCode)->value('md_score');
-            $mdTotal += $mdScore;
         }
-    
-        $knowledgeData->update(['md' => $mdTotal]);
     
         return redirect()->route('hasil_user_view');
     }
-
 }

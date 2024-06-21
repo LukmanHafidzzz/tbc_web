@@ -75,12 +75,25 @@
             @endforeach
         </div>
         <div class="mb-3 text-title fw-semibold fs-5">
-            Solusi
+            Hasil Diagnosa
         </div>
         <div class="card p-5">
             @foreach ($knowledgeData as $data)
             <div>
-                {{ $data->solution }}
+                Anda menderita penyakit: {{ $data->disease }}
+            </div>
+            <div>
+                <?php 
+                if ($data->solution === 'Kategori 1') {
+                    $desc = "TB dewasa (mencakup pasien dewasa yang baru pertama kali didiagnosis dengan TBC yang tidak resistan terhadap obat)";
+                } else {
+                    $desc = "Anak (mencakup di bawah usia 15), formulasi obat sering kali disesuaikan dalam bentuk sirup atau tablet yang bisa dihancurkan untuk memudahkan pemberian";
+                } 
+                ?>
+                Solusi:
+                <div>
+                    {{ $data->solution }}: {{ $desc }}
+                </div>
             </div>
             @endforeach
         </div>
