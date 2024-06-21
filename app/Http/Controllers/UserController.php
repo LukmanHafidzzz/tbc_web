@@ -34,6 +34,14 @@ class UserController extends Controller
         return view('pages.user.hasil', compact('knowledgeData'));
     }
 
+    public function detail_hasil($id)
+    {
+        $userId = auth()->id();
+        $knowledgeData = KnowledgeData::where('user_id', $userId)->with('indications.indication')->findOrFail($id);
+    
+        return view('pages.user.detail_hasil', compact('knowledgeData'));
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

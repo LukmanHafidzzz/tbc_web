@@ -47,8 +47,8 @@
                 </li>
                 <li class="sidebar-item">
                     <a href="{{ route('hasil_user_view') }}" class="sidebar-link">
-                        <div class="mantep d-flex align-items-center ps-4 pt-3 pb-3 fw-semibold {{ request()->routeIs('hasil_user_view') ? 'text-active' : 'text-deactive' }}">
-                            <div class="{{ request()->routeIs('hasil_user_view') ? 'active' : 'deactive' }}"></div>
+                        <div class="mantep d-flex align-items-center ps-4 pt-3 pb-3 fw-semibold {{ request()->routeIs('hasil_user_view') || request()->routeIs('detail_hasil') ? 'text-active' : 'text-deactive' }}">
+                            <div class="{{ request()->routeIs('hasil_user_view') || request()->routeIs('detail_hasil') ? 'active' : 'deactive' }}"></div>
                             <i class="bi bi-file-earmark-check-fill"></i>
                             <span>Hasil Keputusan</span>
                         </div>
@@ -63,7 +63,7 @@
                         {{ request()->routeIs('dashboard_user_view') ? 'Beranda' : '' }}
                         {{ request()->routeIs('pendaftaran_user_view') ? 'Pendaftaran' : '' }}
                         {{ request()->routeIs('konsultasi_user_view') ? 'Konsultasi' : '' }}
-                        {{ request()->routeIs('hasil_user_view') ? 'Hasil Keputusan' : '' }}
+                        {{ request()->routeIs('hasil_user_view') || request()->routeIs('detail_hasil') ? 'Hasil Keputusan' : '' }}
                     </div>
                     <div class="col d-flex justify-content-end fs-4 align-items-center">
                         <div class="btn-group">

@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pendaftaran', [UserController::class, 'pendaftaran_user_view'])->name('pendaftaran_user_view');
     Route::post('/pendaftaran', [UserController::class, 'store'])->name('user.pendaftaran.store');
     Route::get('/hasil', [UserController::class, 'hasil_user_view'])->name('hasil_user_view');
+    Route::get('/hasil/{id}', [UserController::class, 'detail_hasil'])->name('detail_hasil');
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard_admin_view'])->name('dashboard_admin_view');
 
